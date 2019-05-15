@@ -1,16 +1,69 @@
 defmodule JsonJanitor do
   @moduledoc """
-  Documentation for JsonJanitor.
+  `JsonJanitor` helps sanitize elixir terms so that they can be serialized to
+  JSON.
   """
 
   @doc """
-  Hello world.
+  Accepts anything and returns a structure that can be serialized to JSON.
+
+  This is useful in situations where you're not quite sure what can a function
+  can receive, but you know it'll need to serialize to JSON.
+
+  An example of such a situation is in a FallbackController of a Phoenix
+  application. If you have a universal fallback and want to help callers
+  diagnose issues, you may want to return the fallback payload in the response
+  rather than an internal server error.
+
+  Another example is when you want to report an error to an external service
+  like Sentry and you'd like to send along the extra metadata that you're
+  unsure of the format of.
 
   ## Examples
 
-      #iex> JsonJanitor.hello()
-      #:world
+      iex> JsonJanitor.sanitize([:ok, <<128>>])
+      [":ok", "<<128>>"]
 
+  Tuples are converted to lists.
+      iex> JsonJanitor.sanitize({'cat'})
+      ['cat']
+
+  Keyword lists are converted to maps.
+
+      iex> JsonJanitor.sanitize([option: 42])
+      %{option: 42}
+
+  Atoms are converted to strings unless they are keys of maps.
+
+      iex> JsonJanitor.sanitize(%{horse: :dog})
+      %{horse: ":dog"}
+
+  Map keys are converted to binary strings even if they are complex.
+
+      iex> JsonJanitor.sanitize(%{%{cat: 3} => {}})
+      %{"%{cat: 3}" => []}
+
+  Map keys that are atoms are not converted to strings. They are left as atoms.
+
+      iex> JsonJanitor.sanitize(%{cat: 3})
+      %{cat: 3}
+
+  Binaries which cannot be printed are converted to strings of the raw bit
+  data.
+
+      iex> JsonJanitor.sanitize(<<128>>)
+      "<<128>>"
+
+  Structs are converted to maps and then their struct type is added to the map
+  in the `:struct_type` key.
+
+      iex> JsonJanitor.sanitize(%TestStruct{})
+      %{struct_type: "TestStruct", purpose: "to purr", sound: "meow"}
+
+  nil values are left as nil.
+
+      iex> JsonJanitor.sanitize(nil)
+      nil
   """
   def sanitize(%_{} = struct) do
     struct
@@ -22,6 +75,8 @@ defmodule JsonJanitor do
   def sanitize(map) when is_map(map) do
     Enum.into(map, %{}, fn {k, v} -> {sanitized_key_for_map(k), sanitize(v)} end)
   end
+
+  def sanitize(nil), do: nil
 
   def sanitize([]), do: []
 
@@ -52,6 +107,8 @@ defmodule JsonJanitor do
       inspect(binary)
     end
   end
+
+  def sanitize(atom) when is_atom(atom), do: inspect(atom)
 
   def sanitize(other), do: other
 

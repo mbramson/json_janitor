@@ -1,17 +1,15 @@
 defmodule JsonJanitorTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use ExUnitProperties
   doctest JsonJanitor
 
   describe "sanitize/1" do
-    @tag :property_test
     property "does not error for any input" do
       check all input <- term() do
         JsonJanitor.sanitize(input)
       end
     end
 
-    @tag :property_test
     property "output from any input can be serialized to JSON" do
       check all input <- term() do
         result = JsonJanitor.sanitize(input)
@@ -34,10 +32,10 @@ defmodule JsonJanitorTest do
       assert JsonJanitor.sanitize([{}]) == [[]]
     end
 
-    #test "handles a struct properly" do
-      #struct = %Struct{}
-      #assert %{} = JsonJanitor.sanitize(struct)
-    #end
+    test "handles a struct properly" do
+      struct = %TestStruct{}
+      assert %{} = JsonJanitor.sanitize(struct)
+    end
 
     test "handles nil" do
       assert JsonJanitor.sanitize(nil) == nil
