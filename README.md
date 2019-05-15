@@ -1,6 +1,6 @@
 # JsonJanitor
 
-**TODO: Add description**
+`JsonJanitor` helps sanitize elixir terms so that they can be serialized to JSON.
 
 ## Installation
 
@@ -10,7 +10,7 @@ by adding `json_janitor` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:json_janitor, "~> 0.1.0"}
+    {:json_janitor, "~> 1.0.0"}
   ]
 end
 ```
