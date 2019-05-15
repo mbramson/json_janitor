@@ -8,8 +8,8 @@ defmodule JsonJanitor do
 
   ## Examples
 
-      iex> JsonJanitor.hello()
-      :world
+      #iex> JsonJanitor.hello()
+      #:world
 
   """
   def sanitize(%_{} = struct) do
