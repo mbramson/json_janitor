@@ -7,7 +7,13 @@ defmodule JsonJanitor.MixProject do
       version: "1.0.0",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
+      description: description(),
+      name: "JsonJanitor",
+      source_url: "https://github.com/mbramson/json_janitor",
+      package: package(),
+      docs: docs(),
       deps: deps()
     ]
   end
@@ -30,4 +36,26 @@ defmodule JsonJanitor.MixProject do
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp description() do
+    """
+    `JsonJanitor` helps sanitize elixir terms so that they can be serialized to
+    JSON.
+    """
+  end
+
+  defp package() do
+    [
+      files: ["lib", "mix.exs", "README.md", "LICENSE.md"],
+      maintainers: ["Mathew Bramson"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/mbramson/json_janitor"}
+    ]
+  end
+  defp docs() do
+    [
+      main: "JsonJanitor",
+      source_url: "https://github.com/mbramson/json_janitor",
+    ]
+  end
 end
