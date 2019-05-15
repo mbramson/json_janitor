@@ -11,13 +11,17 @@ defmodule JsonJanitor do
   can receive, but you know it'll need to serialize to JSON.
 
   An example of such a situation is in a FallbackController of a Phoenix
-  application. If you have a universal fallback and want to help callers
-  diagnose issues, you may want to return the fallback payload in the response
-  rather than an internal server error.
+  application. If you have a universal fallback and want to help callers of
+  the API diagnose issues, you may want to return the fallback payload in the
+  response. If that term happens to not be serializable to JSON then an
+  internal server error will actually be returned. If `JsonJanitor.sanitize/1`
+  is used first, then you can be sure that it will always send properly.
 
-  Another example is when you want to report an error to an external service
-  like Sentry and you'd like to send along the extra metadata that you're
-  unsure of the format of.
+  Another example is when an external service such as Sentry is used to report
+  errors. If additional metadata is supplied surrounding an error and it cannot
+  be guaranteed to be serializable, then the call to Sentry itself can fail.
+  Using `JsonJanitor.sanitize/1` on this data guarantees that the call will not
+  fail because the data cannot serialize to JSON.
 
   ## Examples
 
