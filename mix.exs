@@ -28,6 +28,7 @@ defmodule JsonJanitor.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ex_doc, "~> 0.20", only: :dev},
       {:jason, "~> 1.0", only: :test},
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
       {:stream_data, "~> 0.4", only: :test},
