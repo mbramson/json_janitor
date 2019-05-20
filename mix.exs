@@ -4,7 +4,7 @@ defmodule JsonJanitor.MixProject do
   def project do
     [
       app: :json_janitor,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
