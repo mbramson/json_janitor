@@ -69,6 +69,7 @@ defmodule JsonJanitor do
       iex> JsonJanitor.sanitize(nil)
       nil
   """
+  @spec sanitize(term()) :: term()
   def sanitize(%_{} = struct) do
     struct
     |> Map.from_struct()
