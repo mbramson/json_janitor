@@ -2,6 +2,9 @@ defmodule JsonJanitor do
   @moduledoc """
   `JsonJanitor` helps sanitize elixir terms so that they can be serialized to
   JSON.
+
+  It makes some opinionated decisions to keep as much structure as possible
+  while guaranteeing that the resulting structure can be serialized to JSON.
   """
 
   @doc """

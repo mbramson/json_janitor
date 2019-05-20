@@ -11,7 +11,10 @@
 [license-img]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: http://opensource.org/licenses/MIT
 
-`JsonJanitor` helps sanitize elixir terms so that they can be serialized to JSON.
+`JsonJanitor` sanitizes elixir terms so that they can be serialized to JSON.
+
+It makes some opinionated decisions to keep as much structure as possible while
+guaranteeing that the resulting structure can be serialized to JSON.
 
 Documentation is located at [https://hexdocs.pm/json_janitor](https://hexdocs.pm/json_janitor)
 

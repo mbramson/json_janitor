@@ -41,7 +41,7 @@ defmodule JsonJanitor.MixProject do
 
   defp description() do
     """
-    `JsonJanitor` helps sanitize elixir terms so that they can be serialized to
+    `JsonJanitor` sanitizes elixir terms so that they can be serialized to
     JSON.
     """
   end
