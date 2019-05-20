@@ -1,7 +1,11 @@
 # JsonJanitor
 
-[![CircleCI](https://circleci.com/gh/mbramson/json_janitor/tree/master.svg?style=svg)](https://circleci.com/gh/mbramson/json_janitor/tree/master) [![Hex Version](https://img.shields.io/hexpm/v/json_janitor.svg)](https://hex.pm/packages/json_janitor) [![License][license-img]][license]
+[![CircleCI][circle-img]][circle] [![Hex Version][hex-img]][hex] [![License][license-img]][license]
 
+[circle-img]: https://circleci.com/gh/mbramson/json_janitor/tree/master.svg?style=svg
+[circle]: https://circleci.com/gh/mbramson/json_janitor/tree/master
+[hex-img]: https://img.shields.io/hexpm/v/json_janitor.svg
+[hex]: https://hex.pm/packages/json_janitor
 [license-img]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: http://opensource.org/licenses/MIT
 
