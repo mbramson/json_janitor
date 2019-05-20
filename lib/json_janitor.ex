@@ -123,7 +123,9 @@ defmodule JsonJanitor do
       inspect(binary)
     end
   end
+
   defp sanitized_key_for_map(atom) when is_atom(atom), do: atom
+
   defp sanitized_key_for_map(key) do
     inspect(key)
   end

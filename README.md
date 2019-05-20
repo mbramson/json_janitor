@@ -1,5 +1,7 @@
 # JsonJanitor
 
+[![CircleCI](https://circleci.com/gh/mbramson/json_janitor/tree/master.svg?style=svg)](https://circleci.com/gh/mbramson/json_janitor/tree/master)
+
 `JsonJanitor` helps sanitize elixir terms so that they can be serialized to JSON.
 
 Documentation is located at [https://hexdocs.pm/json_janitor](https://hexdocs.pm/json_janitor)
