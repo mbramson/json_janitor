@@ -33,18 +33,27 @@ end
 
 ## Examples
 
+Not all terms can be serialized to JSON using `Poison` or `Jason`. When
+serializing some terms, an error will be thrown.
+
 ```elixir
-iex(1)> Jason.encode!({:ok, [option: <<128>>]})
+iex> Jason.encode!({:ok, [option: <<128>>]})
 ** (Protocol.UndefinedError) protocol Jason.Encoder not implemented for {:ok,
 [option: <<128>>]}, Jason.Encoder protocol must always be explicitly
 implemented. This protocol is implemented for: Any, Atom, BitString, Date,
 DateTime, Decimal, Float, Integer, Jason.Fragment, List, Map, NaiveDateTime,
 Time (jason) lib/jason.ex:150: Jason.encode!/2
+```
 
-iex(2)> sanitized = JsonJanitor.sanitize({:ok, [option: <<128>>]})
+By using `JsonJanitor` on terms before they are sanitized, it can be guaranteed
+that the terms will serialize into a structure that does not obfuscate the
+meaning or intention of the original term.
+
+```elixir
+iex> sanitized = JsonJanitor.sanitize({:ok, [option: <<128>>]})
 [":ok", %{option: "<<128>>"}]
 
-iex(3)> Jason.encode!(sanitized)
+iex> Jason.encode!(sanitized)
 "[\":ok\",{\"option\":\"<<128>>\"}]"
 ```
 
